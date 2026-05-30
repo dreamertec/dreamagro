@@ -132,4 +132,34 @@ class DashboardController extends Controller
 
         return redirect()->back()->with('success', 'Schedule deleted successfully.');
     }
+
+    /**
+     * PUT /schedules/{schedule}
+     * Update an existing schedule.
+     */
+    public function updateSchedule(Request $request, Schedule $schedule)
+    {
+        $validated = $request->validate([
+            'type' => 'required|in:dripper,fogger',
+            'time' => 'required|date_format:H:i',
+            'duration' => 'required|integer|min:1',
+        ]);
+
+        $oldType = ucfirst($schedule->type);
+        $oldTime = date('H:i', strtotime($schedule->time));
+        $oldDuration = $schedule->duration;
+
+        $schedule->update([
+            'type' => $validated['type'],
+            'time' => $validated['time'] . ':00',
+            'duration' => $validated['duration'],
+        ]);
+
+        ActivityLog::create([
+            'event' => "Updated Schedule: {$oldType} at {$oldTime} ({$oldDuration}m) -> " . ucfirst($validated['type']) . " at {$validated['time']} ({$validated['duration']}m)",
+            'triggered_by' => 'Admin Dashboard',
+        ]);
+
+        return redirect()->back()->with('success', 'Schedule updated successfully.');
+    }
 }

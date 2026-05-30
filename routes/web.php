@@ -9,4 +9,5 @@ Route::post('/mode', [DashboardController::class, 'updateMode'])->name('dashboar
 Route::post('/override', [DashboardController::class, 'toggleOverride'])->name('dashboard.override');
 Route::post('/schedules', [DashboardController::class, 'storeSchedule'])->name('dashboard.schedules.store');
 Route::delete('/schedules/{schedule}', [DashboardController::class, 'destroySchedule'])->name('dashboard.schedules.destroy');
+Route::put('/schedules/{schedule}', [DashboardController::class, 'updateSchedule'])->name('dashboard.schedules.update');
 

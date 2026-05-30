@@ -794,20 +794,26 @@
                                 </td>
                                 <td>{{ $s->duration }} minutes</td>
                                 <td style="color: var(--text-secondary);">Daily</td>
-                                <td style="text-align: right;">
-                                    <form action="{{ route('dashboard.schedules.destroy', $s->id) }}" method="POST" style="display: inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn-delete" title="Delete schedule">
-                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                <polyline points="3 6 5 6 21 6"></polyline>
-                                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                                                <line x1="10" y1="11" x2="10" y2="17"></line>
-                                                <line x1="14" y1="11" x2="14" y2="17"></line>
-                                            </svg>
-                                        </button>
-                                    </form>
-                                </td>
+                                <td style="text-align: right; display: flex; gap: 0.5rem; justify-content: flex-end;">
+                                     <button type="button" class="btn-delete" style="color: var(--color-accent); padding: 0.25rem; border-radius: 6px; display: inline-flex;" title="Edit schedule" onclick="openEditModal('{{ $s->id }}', '{{ $s->type }}', '{{ date('H:i', strtotime($s->time)) }}', '{{ $s->duration }}')">
+                                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                             <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                             <path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                         </svg>
+                                     </button>
+                                     <form action="{{ route('dashboard.schedules.destroy', $s->id) }}" method="POST" style="display: inline-flex;">
+                                         @csrf
+                                         @method('DELETE')
+                                         <button type="submit" class="btn-delete" title="Delete schedule">
+                                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                 <polyline points="3 6 5 6 21 6"></polyline>
+                                                 <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                                 <line x1="10" y1="11" x2="10" y2="17"></line>
+                                                 <line x1="14" y1="11" x2="14" y2="17"></line>
+                                             </svg>
+                                         </button>
+                                     </form>
+                                 </td>
                             </tr>
                             @empty
                             <tr>
@@ -994,6 +1000,65 @@
                 })
                 .catch(error => console.warn("Background sync failed:", error));
         }, 5000);
+
+        // Edit Schedule Modal Handlers
+        function openEditModal(id, type, time, duration) {
+            document.getElementById('edit-type').value = type;
+            document.getElementById('edit-time').value = time;
+            document.getElementById('edit-duration').value = duration;
+            
+            const form = document.getElementById('edit-schedule-form');
+            form.action = `/schedules/${id}`;
+            
+            document.getElementById('edit-modal').style.display = 'flex';
+        }
+        
+        function closeEditModal() {
+            document.getElementById('edit-modal').style.display = 'none';
+        }
     </script>
+
+    <!-- Edit Schedule Modal Overlay (Frosted Glass Glassmorphism) -->
+    <div id="edit-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(11, 9, 20, 0.7); backdrop-filter: blur(8px); justify-content: center; align-items: center; z-index: 1000;">
+        <div class="card" style="width: 420px; border: 1px solid var(--card-hover-border); box-shadow: 0 10px 40px rgba(0,0,0,0.5); padding: 2rem;">
+            <div class="card-title-group" style="margin-bottom: 1.25rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.75rem;">
+                <h3 class="card-title" style="font-size: 1.2rem; display: flex; align-items: center; gap: 0.5rem; margin: 0;">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="color: var(--color-accent);">
+                        <path d="M19,19H5V8H19M16,1V3H8V1H6V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3H18V1M17,12H12V17H17V12Z"/>
+                    </svg>
+                    Edit Timer Schedule
+                </h3>
+                <button type="button" onclick="closeEditModal()" style="background: transparent; border: none; color: var(--text-secondary); cursor: pointer; font-size: 1.75rem; padding: 0; line-height: 1;">&times;</button>
+            </div>
+            
+            <form id="edit-schedule-form" method="POST">
+                @csrf
+                @method('PUT')
+                
+                <div class="form-group" style="margin-bottom: 1rem;">
+                    <label class="form-label" style="font-size: 0.8rem; margin-bottom: 0.4rem;">Valve Type</label>
+                    <select name="type" id="edit-type" class="form-select" required style="padding: 0.6rem 0.8rem;">
+                        <option value="dripper">Dripper Valve</option>
+                        <option value="fogger">Fogger Valve</option>
+                    </select>
+                </div>
+                
+                <div class="form-group" style="margin-bottom: 1rem;">
+                    <label class="form-label" style="font-size: 0.8rem; margin-bottom: 0.4rem;">Start Time</label>
+                    <input type="time" name="time" id="edit-time" class="form-input" required style="padding: 0.6rem 0.8rem;">
+                </div>
+                
+                <div class="form-group" style="margin-bottom: 1.5rem;">
+                    <label class="form-label" style="font-size: 0.8rem; margin-bottom: 0.4rem;">Duration (Mins)</label>
+                    <input type="number" name="duration" id="edit-duration" class="form-input" min="1" max="120" required style="padding: 0.6rem 0.8rem;">
+                </div>
+                
+                <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+                    <button type="button" onclick="closeEditModal()" class="form-input" style="text-align: center; cursor: pointer; border-color: rgba(255,255,255,0.05); background: transparent; padding: 0.6rem 1rem;">Cancel</button>
+                    <button type="submit" class="btn-submit" style="margin-top: 0; padding: 0.6rem 1rem; background: linear-gradient(135deg, var(--color-accent), #2563eb); box-shadow: 0 4px 15px rgba(59,130,246,0.2);">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
