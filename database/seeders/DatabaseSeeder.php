@@ -58,7 +58,7 @@ class DatabaseSeeder extends Seeder
             ['email' => 'admin@dreamagro.com'],
             [
                 'name' => 'DreamAgro Admin',
-                'password' => bcrypt('password'),
+                'password' => bcrypt('Manu123+-2544s@'),
             ]
         );
     }
