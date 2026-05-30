@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,11 +18,14 @@
             --card-hover-border: rgba(255, 255, 255, 0.15);
             --text-primary: #f3f4f6;
             --text-secondary: #9ca3af;
-            --color-primary: #10b981; /* Emerald */
+            --color-primary: #10b981;
+            /* Emerald */
             --color-primary-rgb: 16, 185, 129;
-            --color-accent: #3b82f6; /* Blue */
+            --color-accent: #3b82f6;
+            /* Blue */
             --color-accent-rgb: 59, 130, 246;
-            --color-warning: #f59e0b; /* Amber */
+            --color-warning: #f59e0b;
+            /* Amber */
             --color-danger: #ef4444;
             --shadow-glow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
@@ -35,7 +39,7 @@
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-color);
-            background-image: 
+            background-image:
                 radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.12) 0%, transparent 40%),
                 radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 40%),
                 radial-gradient(circle at 50% 50%, rgba(15, 12, 29, 1) 0%, rgba(11, 9, 20, 1) 100%);
@@ -46,7 +50,10 @@
             overflow-x: hidden;
         }
 
-        h1, h2, h3, h4 {
+        h1,
+        h2,
+        h3,
+        h4 {
             font-family: 'Outfit', sans-serif;
             font-weight: 600;
         }
@@ -99,6 +106,47 @@
 
         .status-text-desktop {
             display: none;
+        }
+        .logo-group {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            text-align: left;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 2px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .logo-text h1 {
+            font-size: 1.5rem;
+            background: linear-gradient(to right, #ffffff, #d1d5db);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.15rem;
+            line-height: 1.2;
+        }
+
+        .logo-text span {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            display: block;
         }
 
         .logout-form {
@@ -260,11 +308,13 @@
             border: 1px solid rgba(245, 158, 11, 0.2);
             color: var(--color-warning);
         }
+
         .widget-hum .widget-icon {
             background: rgba(59, 130, 246, 0.12);
             border: 1px solid rgba(59, 130, 246, 0.2);
             color: var(--color-accent);
         }
+
         .widget-device .widget-icon {
             background: rgba(16, 185, 129, 0.12);
             border: 1px solid rgba(16, 185, 129, 0.2);
@@ -335,11 +385,13 @@
             border: 1px solid rgba(16, 185, 129, 0.3);
             color: var(--color-primary);
         }
+
         body.mode-manual .mode-btn.btn-manual {
             background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 0.05));
             border: 1px solid rgba(59, 130, 246, 0.3);
             color: var(--color-accent);
         }
+
         body.mode-disabled .mode-btn.btn-disabled {
             background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(239, 68, 68, 0.05));
             border: 1px solid rgba(239, 68, 68, 0.3);
@@ -438,12 +490,12 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
-        input:checked + .slider {
+        input:checked+.slider {
             background-color: var(--color-primary);
             box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
         }
 
-        input:checked + .slider:before {
+        input:checked+.slider:before {
             transform: translateX(26px);
         }
 
@@ -460,7 +512,8 @@
             font-weight: 500;
         }
 
-        .form-select, .form-input {
+        .form-select,
+        .form-input {
             width: 100%;
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -473,7 +526,8 @@
             transition: all 0.2s ease;
         }
 
-        .form-select:focus, .form-input:focus {
+        .form-select:focus,
+        .form-input:focus {
             border-color: var(--color-primary);
             background: rgba(255, 255, 255, 0.06);
         }
@@ -618,10 +672,12 @@
                 transform: scale(0.95);
                 box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
             }
+
             70% {
                 transform: scale(1);
                 box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
             }
+
             100% {
                 transform: scale(0.95);
                 box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
@@ -629,15 +685,14 @@
         }
     </style>
 </head>
+
 <body class="mode-{{ $settings->mode }}">
     <div class="container">
         <!-- HEADER -->
         <header>
             <div class="logo-group">
                 <div class="logo-icon">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6M12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8Z"/>
-                    </svg>
+                    <img src="{{ asset('images/dreamagro_logo.png') }}" alt="DreamAgro Logo" class="logo-img" />
                 </div>
                 <div class="logo-text">
                     <h1>DreamAgro</h1>
@@ -654,7 +709,7 @@
                     @csrf
                     <button type="submit" class="btn-logout" title="Logout">
                         <svg viewBox="0 0 24 24">
-                            <path d="M16,17V14H9V10H16V7L21,12L16,17M14,2A2,2 0 0,1 16,4V6H14V4H5V20H14V18H16V20A2,2 0 0,1 14,22H5A2,2 0 0,1 3,20V4A2,2 0 0,1 5,2H14Z"/>
+                            <path d="M16,17V14H9V10H16V7L21,12L16,17M14,2A2,2 0 0,1 16,4V6H14V4H5V20H14V18H16V20A2,2 0 0,1 14,22H5A2,2 0 0,1 3,20V4A2,2 0 0,1 5,2H14Z" />
                         </svg>
                         <span>Logout</span>
                     </button>
@@ -719,7 +774,7 @@
                 <div class="card-title-group">
                     <h3 class="card-title">
                         <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                            <path d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.47,5.34 14.86,5.08L14.47,2.42C14.43,2.18 14.22,2 13.97,2H9.97C9.72,2 9.5,2.18 9.47,2.42L9.08,5.08C8.47,5.34 7.9,5.66 7.38,6.05L4.89,5.05C4.67,4.96 4.4,5.05 4.27,5.27L2.27,8.73C2.15,8.95 2.2,9.22 2.39,9.37L4.5,11C4.47,11.34 4.45,11.67 4.45,12C4.45,12.33 4.47,12.65 4.5,12.97L2.39,14.63C2.2,14.78 2.15,15.05 2.27,15.27L4.27,18.73C4.4,18.95 4.67,19.04 4.89,18.95L7.38,17.95C7.9,18.34 8.47,18.66 9.08,18.92L9.47,21.58C9.5,21.82 9.72,22 9.97,22H13.97C14.22,22 14.43,21.82 14.47,21.58L14.86,18.92C15.47,18.66 16.04,18.34 16.56,17.95L19.05,18.95C19.27,19.04 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z"/>
+                            <path d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.47,5.34 14.86,5.08L14.47,2.42C14.43,2.18 14.22,2 13.97,2H9.97C9.72,2 9.5,2.18 9.47,2.42L9.08,5.08C8.47,5.34 7.9,5.66 7.38,6.05L4.89,5.05C4.67,4.96 4.4,5.05 4.27,5.27L2.27,8.73C2.15,8.95 2.2,9.22 2.39,9.37L4.5,11C4.47,11.34 4.45,11.67 4.45,12C4.45,12.33 4.47,12.65 4.5,12.97L2.39,14.63C2.2,14.78 2.15,15.05 2.27,15.27L4.27,18.73C4.4,18.95 4.67,19.04 4.89,18.95L7.38,17.95C7.9,18.34 8.47,18.66 9.08,18.92L9.47,21.58C9.5,21.82 9.72,22 9.97,22H13.97C14.22,22 14.43,21.82 14.47,21.58L14.86,18.92C15.47,18.66 16.04,18.34 16.56,17.95L19.05,18.95C19.27,19.04 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z" />
                         </svg>
                         System Controls
                     </h3>
@@ -805,7 +860,7 @@
                 <div class="card-title-group">
                     <h3 class="card-title">
                         <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                            <path d="M19,19H5V8H19M16,1V3H8V1H6V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3H18V1M17,12H12V17H17V12Z"/>
+                            <path d="M19,19H5V8H19M16,1V3H8V1H6V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3H18V1M17,12H12V17H17V12Z" />
                         </svg>
                         Irrigation Schedule Manager
                     </h3>
@@ -861,25 +916,25 @@
                                 <td>{{ $s->duration }} minutes</td>
                                 <td style="color: var(--text-secondary);">Daily</td>
                                 <td style="text-align: right; display: flex; gap: 0.5rem; justify-content: flex-end;">
-                                     <button type="button" class="btn-delete" style="color: var(--color-accent); padding: 0.25rem; border-radius: 6px; display: inline-flex;" title="Edit schedule" onclick="openEditModal('{{ $s->id }}', '{{ $s->type }}', '{{ date('H:i', strtotime($s->time)) }}', '{{ $s->duration }}')">
-                                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                             <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                                             <path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                                         </svg>
-                                     </button>
-                                     <form action="{{ route('dashboard.schedules.destroy', $s->id) }}" method="POST" style="display: inline-flex;">
-                                         @csrf
-                                         @method('DELETE')
-                                         <button type="submit" class="btn-delete" title="Delete schedule">
-                                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                 <polyline points="3 6 5 6 21 6"></polyline>
-                                                 <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                                                 <line x1="10" y1="11" x2="10" y2="17"></line>
-                                                 <line x1="14" y1="11" x2="14" y2="17"></line>
-                                             </svg>
-                                         </button>
-                                     </form>
-                                 </td>
+                                    <button type="button" class="btn-delete" style="color: var(--color-accent); padding: 0.25rem; border-radius: 6px; display: inline-flex;" title="Edit schedule" onclick="openEditModal('{{ $s->id }}', '{{ $s->type }}', '{{ date('H:i', strtotime($s->time)) }}', '{{ $s->duration }}')">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                            <path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                        </svg>
+                                    </button>
+                                    <form action="{{ route('dashboard.schedules.destroy', $s->id) }}" method="POST" style="display: inline-flex;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn-delete" title="Delete schedule">
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <polyline points="3 6 5 6 21 6"></polyline>
+                                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                                <line x1="10" y1="11" x2="10" y2="17"></line>
+                                                <line x1="14" y1="11" x2="14" y2="17"></line>
+                                            </svg>
+                                        </button>
+                                    </form>
+                                </td>
                             </tr>
                             @empty
                             <tr>
@@ -897,7 +952,7 @@
             <div class="card-title-group">
                 <h3 class="card-title">
                     <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                        <path d="M13,19C13,19.7 13.13,20.37 13.35,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5V13.35C20.37,13.13 19.7,13 19,13V5H5V19H13M11,7H7V9H11V7M17,7H13V9H17V7M11,11H7V13H11V11M13,11H12.35C12.13,11.63 11.79,12.21 11.35,12.7V13H13V11M17,12.35L19,10.35L21.65,13L17,17.65L14,14.65L15.35,13.3L17,15L17,12.35Z"/>
+                        <path d="M13,19C13,19.7 13.13,20.37 13.35,21H5A2,2 0 0,1 3,19V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5V13.35C20.37,13.13 19.7,13 19,13V5H5V19H13M11,7H7V9H11V7M17,7H13V9H17V7M11,11H7V13H11V11M13,11H12.35C12.13,11.63 11.79,12.21 11.35,12.7V13H13V11M17,12.35L19,10.35L21.65,13L17,17.65L14,14.65L15.35,13.3L17,15L17,12.35Z" />
                     </svg>
                     System Operations Log (Valve Opens & Closes)
                 </h3>
@@ -919,9 +974,9 @@
                             <td style="color: var(--text-secondary); font-family: monospace;">{{ $log->created_at->format('Y-m-d H:i:s') }}</td>
                             <td style="font-weight: 500;">
                                 @if(str_contains(strtolower($log->event), 'open') || str_contains(strtolower($log->event), 'start') || str_contains(strtolower($log->event), 'on'))
-                                    <span style="color: var(--color-primary); font-weight: 600;">●</span>
+                                <span style="color: var(--color-primary); font-weight: 600;">●</span>
                                 @else
-                                    <span style="color: var(--color-danger); font-weight: 600;">○</span>
+                                <span style="color: var(--color-danger); font-weight: 600;">○</span>
                                 @endif
                                 {{ $log->event }}
                             </td>
@@ -955,39 +1010,41 @@
         // Function to update system mode (auto, manual, disabled)
         function updateSystemMode(mode) {
             fetch("{{ route('dashboard.mode') }}", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRF-TOKEN": csrfToken
-                },
-                body: JSON.stringify({ mode: mode })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    // Update body class to toggle theme indicators
-                    document.body.className = '';
-                    document.body.classList.add('mode-' + mode);
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": csrfToken
+                    },
+                    body: JSON.stringify({
+                        mode: mode
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        // Update body class to toggle theme indicators
+                        document.body.className = '';
+                        document.body.classList.add('mode-' + mode);
 
-                    // Update UI labels
-                    document.getElementById('status-mode-label').innerText = mode;
+                        // Update UI labels
+                        document.getElementById('status-mode-label').innerText = mode;
 
-                    // Toggle active button state
-                    document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
-                    document.querySelector('.btn-' + mode).classList.add('active');
+                        // Toggle active button state
+                        document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+                        document.querySelector('.btn-' + mode).classList.add('active');
 
-                    // If system is disabled, turn off all check toggles visually
-                    if (mode === 'disabled') {
-                        document.querySelectorAll('.toggle-switch input').forEach(input => {
-                            input.checked = false;
-                        });
-                        document.querySelectorAll('.control-row').forEach(row => {
-                            row.classList.remove('active');
-                        });
+                        // If system is disabled, turn off all check toggles visually
+                        if (mode === 'disabled') {
+                            document.querySelectorAll('.toggle-switch input').forEach(input => {
+                                input.checked = false;
+                            });
+                            document.querySelectorAll('.control-row').forEach(row => {
+                                row.classList.remove('active');
+                            });
+                        }
                     }
-                }
-            })
-            .catch(error => console.error("Error updating mode:", error));
+                })
+                .catch(error => console.error("Error updating mode:", error));
         }
 
         // Function to toggle manual override settings
@@ -996,31 +1053,34 @@
             const state = checkbox.checked ? 'ON' : 'OFF';
 
             fetch("{{ route('dashboard.override') }}", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRF-TOKEN": csrfToken
-                },
-                body: JSON.stringify({ target: target, state: state })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    const row = document.getElementById('row-' + target);
-                    if (state === 'ON') {
-                        row.classList.add('active');
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": csrfToken
+                    },
+                    body: JSON.stringify({
+                        target: target,
+                        state: state
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        const row = document.getElementById('row-' + target);
+                        if (state === 'ON') {
+                            row.classList.add('active');
+                        } else {
+                            row.classList.remove('active');
+                        }
                     } else {
-                        row.classList.remove('active');
+                        // Revert UI toggle on failure
+                        checkbox.checked = !checkbox.checked;
                     }
-                } else {
-                    // Revert UI toggle on failure
+                })
+                .catch(error => {
+                    console.error("Error toggling override:", error);
                     checkbox.checked = !checkbox.checked;
-                }
-            })
-            .catch(error => {
-                console.error("Error toggling override:", error);
-                checkbox.checked = !checkbox.checked;
-            });
+                });
         }
 
         // Live reload dashboard data & log listings periodically (every 5 seconds)
@@ -1046,7 +1106,7 @@
                         const newToggle = doc.getElementById('toggle-' + t);
                         const currentToggle = document.getElementById('toggle-' + t);
                         const row = document.getElementById('row-' + t);
-                        
+
                         if (newToggle && currentToggle) {
                             currentToggle.checked = newToggle.checked;
                             if (newToggle.checked) {
@@ -1072,13 +1132,13 @@
             document.getElementById('edit-type').value = type;
             document.getElementById('edit-time').value = time;
             document.getElementById('edit-duration').value = duration;
-            
+
             const form = document.getElementById('edit-schedule-form');
             form.action = `/schedules/${id}`;
-            
+
             document.getElementById('edit-modal').style.display = 'flex';
         }
-        
+
         function closeEditModal() {
             document.getElementById('edit-modal').style.display = 'none';
         }
@@ -1090,17 +1150,17 @@
             <div class="card-title-group" style="margin-bottom: 1.25rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.75rem;">
                 <h3 class="card-title" style="font-size: 1.2rem; display: flex; align-items: center; gap: 0.5rem; margin: 0;">
                     <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="color: var(--color-accent);">
-                        <path d="M19,19H5V8H19M16,1V3H8V1H6V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3H18V1M17,12H12V17H17V12Z"/>
+                        <path d="M19,19H5V8H19M16,1V3H8V1H6V3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3H18V1M17,12H12V17H17V12Z" />
                     </svg>
                     Edit Timer Schedule
                 </h3>
                 <button type="button" onclick="closeEditModal()" style="background: transparent; border: none; color: var(--text-secondary); cursor: pointer; font-size: 1.75rem; padding: 0; line-height: 1;">&times;</button>
             </div>
-            
+
             <form id="edit-schedule-form" method="POST">
                 @csrf
                 @method('PUT')
-                
+
                 <div class="form-group" style="margin-bottom: 1rem;">
                     <label class="form-label" style="font-size: 0.8rem; margin-bottom: 0.4rem;">Valve Type</label>
                     <select name="type" id="edit-type" class="form-select" required style="padding: 0.6rem 0.8rem;">
@@ -1108,17 +1168,17 @@
                         <option value="fogger">Fogger Valve</option>
                     </select>
                 </div>
-                
+
                 <div class="form-group" style="margin-bottom: 1rem;">
                     <label class="form-label" style="font-size: 0.8rem; margin-bottom: 0.4rem;">Start Time</label>
                     <input type="time" name="time" id="edit-time" class="form-input" required style="padding: 0.6rem 0.8rem;">
                 </div>
-                
+
                 <div class="form-group" style="margin-bottom: 1.5rem;">
                     <label class="form-label" style="font-size: 0.8rem; margin-bottom: 0.4rem;">Duration (Mins)</label>
                     <input type="number" name="duration" id="edit-duration" class="form-input" min="1" max="120" required style="padding: 0.6rem 0.8rem;">
                 </div>
-                
+
                 <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
                     <button type="button" onclick="closeEditModal()" class="form-input" style="text-align: center; cursor: pointer; border-color: rgba(255,255,255,0.05); background: transparent; padding: 0.6rem 1rem;">Cancel</button>
                     <button type="submit" class="btn-submit" style="margin-top: 0; padding: 0.6rem 1rem; background: linear-gradient(135deg, var(--color-accent), #2563eb); box-shadow: 0 4px 15px rgba(59,130,246,0.2);">Save Changes</button>
@@ -1127,4 +1187,5 @@
         </div>
     </div>
 </body>
+
 </html>
