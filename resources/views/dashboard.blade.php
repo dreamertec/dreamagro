@@ -60,64 +60,104 @@
         /* HEADER */
         header {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2.5rem;
+            flex-direction: column;
+            gap: 1.25rem;
+            margin-bottom: 2rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            padding-bottom: 1.5rem;
+            padding-bottom: 1.25rem;
+            align-items: center;
+            text-align: center;
         }
 
-        .logo-group {
+        .header-actions {
             display: flex;
             align-items: center;
+            justify-content: space-between;
+            width: 100%;
             gap: 0.75rem;
         }
 
-        .logo-icon {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
-        }
-
-        .logo-icon svg {
-            width: 26px;
-            height: 26px;
-            fill: white;
-        }
-
-        .logo-text h1 {
-            font-size: 1.75rem;
-            letter-spacing: -0.025em;
-            background: linear-gradient(to right, #ffffff, #d1d5db);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .logo-text span {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            font-family: 'Outfit', sans-serif;
-            display: block;
-            margin-top: -2px;
-        }
-
-        .system-time {
+        .system-status {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             border-radius: 12px;
-            padding: 0.5rem 1rem;
+            padding: 0.6rem 1rem;
             font-family: 'Outfit', sans-serif;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             color: var(--text-secondary);
             backdrop-filter: blur(10px);
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            flex-grow: 1;
+            justify-content: center;
+        }
+
+        .status-text-mobile {
+            display: inline;
+        }
+
+        .status-text-desktop {
+            display: none;
+        }
+
+        .logout-form {
+            display: inline-flex;
+        }
+
+        .btn-logout {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            color: var(--color-danger);
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            transition: all 0.2s ease;
+        }
+
+        .btn-logout svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            fill: none;
+        }
+
+        .btn-logout:hover {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+
+        @media (min-width: 768px) {
+            header {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                text-align: left;
+            }
+
+            .header-actions {
+                width: auto;
+                justify-content: flex-end;
+                gap: 1rem;
+            }
+
+            .system-status {
+                flex-grow: 0;
+            }
+
+            .status-text-mobile {
+                display: none;
+            }
+
+            .status-text-desktop {
+                display: inline;
+            }
         }
 
         .system-time span {
@@ -126,9 +166,22 @@
         }
 
         /* GRID LAYOUTS */
+        .schedule-form-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            align-items: end;
+        }
+
+        @media (min-width: 640px) {
+            .schedule-form-grid {
+                grid-template-columns: 2fr 2fr 1fr;
+            }
+        }
+
         .widget-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 1.5rem;
             margin-bottom: 2rem;
         }
@@ -591,17 +644,19 @@
                     <span>Precision Agriculture Dashboard</span>
                 </div>
             </div>
-            <div class="system-time" style="gap: 1.5rem; display: flex; align-items: center;">
-                <div><span class="pulse-indicator"></span> Controller Online • Subdomain: <span>dreamagro.dreamertec.com</span></div>
-                <form action="{{ route('logout') }}" method="POST" style="display: inline-flex; border-left: 1px solid rgba(255,255,255,0.1); padding-left: 1rem;">
+            <div class="header-actions">
+                <div class="system-status">
+                    <span class="pulse-indicator"></span>
+                    <span class="status-text-desktop">Controller Online • dreamagro.dreamertec.com</span>
+                    <span class="status-text-mobile">Online</span>
+                </div>
+                <form action="{{ route('logout') }}" method="POST" class="logout-form">
                     @csrf
-                    <button type="submit" style="background: transparent; border: none; color: var(--color-danger); cursor: pointer; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; gap: 0.35rem; transition: opacity 0.2s ease;" onmouseover="this.style.opacity=0.8" onmouseout="this.style.opacity=1">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                            <polyline points="16 17 21 12 16 7"></polyline>
-                            <line x1="21" y1="12" x2="9" y2="12"></line>
+                    <button type="submit" class="btn-logout" title="Logout">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M16,17V14H9V10H16V7L21,12L16,17M14,2A2,2 0 0,1 16,4V6H14V4H5V20H14V18H16V20A2,2 0 0,1 14,22H5A2,2 0 0,1 3,20V4A2,2 0 0,1 5,2H14Z"/>
                         </svg>
-                        Logout
+                        <span>Logout</span>
                     </button>
                 </form>
             </div>
@@ -759,7 +814,7 @@
                 <!-- Add Schedule Form -->
                 <form action="{{ route('dashboard.schedules.store') }}" method="POST" style="margin-bottom: 2rem;">
                     @csrf
-                    <div style="display: grid; grid-template-columns: 2fr 2fr 1fr; gap: 1rem; align-items: end;">
+                    <div class="schedule-form-grid">
                         <div class="form-group" style="margin-bottom: 0;">
                             <label class="form-label">Valve Type</label>
                             <select name="type" class="form-select" required>
@@ -1030,8 +1085,8 @@
     </script>
 
     <!-- Edit Schedule Modal Overlay (Frosted Glass Glassmorphism) -->
-    <div id="edit-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(11, 9, 20, 0.7); backdrop-filter: blur(8px); justify-content: center; align-items: center; z-index: 1000;">
-        <div class="card" style="width: 420px; border: 1px solid var(--card-hover-border); box-shadow: 0 10px 40px rgba(0,0,0,0.5); padding: 2rem;">
+    <div id="edit-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(11, 9, 20, 0.7); backdrop-filter: blur(8px); justify-content: center; align-items: center; z-index: 1000; padding: 1rem;">
+        <div class="card" style="width: 100%; max-width: 420px; border: 1px solid var(--card-hover-border); box-shadow: 0 10px 40px rgba(0,0,0,0.5); padding: 2rem;">
             <div class="card-title-group" style="margin-bottom: 1.25rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.75rem;">
                 <h3 class="card-title" style="font-size: 1.2rem; display: flex; align-items: center; gap: 0.5rem; margin: 0;">
                     <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="color: var(--color-accent);">
